@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+*~
+*.DS_Store
+*.class
+*java#
+*.classpath
+*.project
+*.settings
+*/bin/
+*/gen/
+=======
+.DS_Store
+target
+*.iws
+*.ipr
+*.iml
+.classpath
+.project
+.settings
+.springBeans
+>>>>>>> 92fa28948b224947a7d652f2ce8421353409cda8

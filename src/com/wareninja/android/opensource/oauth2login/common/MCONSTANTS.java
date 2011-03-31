@@ -86,11 +86,15 @@ public class MCONSTANTS {
 	public static final String FSQ_APP_OAUTH_URL = "/oauth2/authenticate";
 	public static final String FSQ_APP_TOKEN_URL = "/oauth2/access_token";
 	
-	public static final String FB_APP_ID = "<YOURAPP_atFACEBOOK_APP_ID>";//"200114703354239";  
-	public static final String[] PERMISSIONS = new String[] {
+	public static final String FB_APP_ID = "<YOURAPP_atFACEBOOK_APP_ID>";  
+	public static final String[] FB_PERMISSIONS = new String[] {
 		"publish_stream", "read_stream"
-		, "offline_access"
+		, "offline_access" 
 		}; 
+	public static final String FB_APP_CALLBACK_OAUTHCALLBACK = "fbconnect://success";// YOURAPP_REDIRECT_URI
+	public static final String FB_APP_REDIRECT_SIGNIN = "https://m.facebook.com";
+	public static final String FB_APP_OAUTH_BASEURL = "https://m.facebook.com";
+	public static final String FB_APP_OAUTH_URL = "/dialog/oauth/";
 	
 	public static final String FACEBOOK_USER_ME = "_FACEBOOK_USER_ME";
 	public static final String FOURSQUARE_USER_ME = "_FOURSQUARE_USER_ME";

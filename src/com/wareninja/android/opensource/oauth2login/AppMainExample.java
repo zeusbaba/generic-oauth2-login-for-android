@@ -26,6 +26,7 @@ import com.wareninja.android.opensource.oauth2login.common.LOGGING;
 import com.wareninja.android.opensource.oauth2login.common.MCONSTANTS;
 import com.wareninja.android.opensource.oauth2login.common.NotifierHelper;
 import com.wareninja.android.opensource.oauth2login.common.WebService;
+import com.wareninja.android.opensource.oauth2login.facebook.FacebookOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.foursquare.FsqOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.gowalla.GowallaOAuthDialog;
 
@@ -33,6 +34,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieSyncManager;
@@ -171,10 +173,55 @@ public class AppMainExample extends Activity {
     }
 
 	public void onClick_facebookLogin(View v) {
-		NotifierHelper.displayToast(mContext, "TODO: onClick_facebookLogin", NotifierHelper.SHORT_TOAST);
+		//NotifierHelper.displayToast(mContext, "TODO: onClick_facebookLogin", NotifierHelper.SHORT_TOAST);
 		
-		// TODO: implement Facebook OAuth2 login!!!
+    	webService = new WebService();
+    	
+    	String authRequestRedirect = MCONSTANTS.FB_APP_OAUTH_BASEURL+MCONSTANTS.FB_APP_OAUTH_URL
+		        + "?client_id="+MCONSTANTS.FB_APP_ID
+		        + "&response_type=token" 
+		        + "&display=touch"
+		        + "&scope=" + TextUtils.join(",", MCONSTANTS.FB_PERMISSIONS)
+		        + "&redirect_uri="+MCONSTANTS.FB_APP_CALLBACK_OAUTHCALLBACK
+		        ;
+		if(LOGGING.DEBUG)Log.d(TAG, "authRequestRedirect->"+authRequestRedirect);
 		
+		CookieSyncManager.createInstance(this);
+		new FacebookOAuthDialog(mContext, authRequestRedirect
+				, new GenericDialogListener() {
+			public void onComplete(Bundle values) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onComplete->"+values);
+				// https://YOUR_REGISTERED_REDIRECT_URI/?code=CODE
+				// onComplete->Bundle[{expires_in=0, access_token=<ACCESS_TOKEN>}]
+/*
+if user ALLOWs your app -> Bundle[{expires_in=0, access_token=<ACCESS_TOKEN>}]
+if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user+denied+your+request}]
+ */
+				// ensure any cookies set by the dialog are saved
+                CookieSyncManager.getInstance().sync();
+				
+				String tokenResponse = "";
+				try{
+					
+					tokenResponse = values.toString();
+					
+					broadcastLoginResult(MCONSTANTS.COMMUNITY_FACEBOOK, tokenResponse);
+					//JSONObject tokenJson = new JSONObject(tokenResponse);
+					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
+
+				}
+				catch (Exception ex1){
+					Log.w(TAG, ex1.toString());
+					tokenResponse = null;
+				}
+		    }
+			public void onError(String e) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onError->"+e);
+		    }
+			public void onCancel() {
+				if(LOGGING.DEBUG)Log.d(TAG, "onCancel()");
+		    }
+		}).show();
 	}
 	
 	private void broadcastLoginResult(int community, String payload) {

@@ -175,6 +175,8 @@ public class AppMainExample extends Activity {
 	public void onClick_facebookLogin(View v) {
 		//NotifierHelper.displayToast(mContext, "TODO: onClick_facebookLogin", NotifierHelper.SHORT_TOAST);
 		
+		// https://developers.facebook.com/docs/reference/dialogs/oauth/
+		
     	webService = new WebService();
     	
     	String authRequestRedirect = MCONSTANTS.FB_APP_OAUTH_BASEURL+MCONSTANTS.FB_APP_OAUTH_URL

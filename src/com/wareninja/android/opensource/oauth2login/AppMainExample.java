@@ -1,20 +1,23 @@
 /***
- * 	Copyright (c) 2011 WareNinja.com
- * 	Author: yg@wareninja.com
- *  http://www.WareNinja.net - https://github.com/wareninja	
- * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
-*/
+	Copyright (c) 2011-2012 WareNinja.com 
+	http://www.WareNinja.com - https://github.com/WareNinja
+	
+	Author: yg@wareninja.com / twitter: @WareNinja
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  not use this file except in compliance with the License. You may obtain
+  a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  >> Summary of the license:
+  	You are allowed to re-use this code as you like, no kittens should be harmed though! 
+ */
+
 
 package com.wareninja.android.opensource.oauth2login;
 
@@ -23,7 +26,7 @@ import java.util.Map;
 
 import com.wareninja.android.opensource.oauth2login.common.GenericDialogListener;
 import com.wareninja.android.opensource.oauth2login.common.LOGGING;
-import com.wareninja.android.opensource.oauth2login.common.MCONSTANTS;
+import com.wareninja.android.opensource.oauth2login.common.AppContext;
 import com.wareninja.android.opensource.oauth2login.common.NotifierHelper;
 import com.wareninja.android.opensource.oauth2login.common.WebService;
 import com.wareninja.android.opensource.oauth2login.facebook.FacebookOAuthDialog;
@@ -59,11 +62,11 @@ public class AppMainExample extends Activity {
     	//NotifierHelper.displayToast(mContext, "onClick_fsqLogin", NotifierHelper.SHORT_TOAST);
     	webService = new WebService();
     	
-    	String authRequestRedirect = MCONSTANTS.FSQ_APP_OAUTH_BASEURL+MCONSTANTS.FSQ_APP_OAUTH_URL
-		        + "?client_id="+MCONSTANTS.FSQ_APP_KEY
+    	String authRequestRedirect = AppContext.FSQ_APP_OAUTH_BASEURL+AppContext.FSQ_APP_OAUTH_URL
+		        + "?client_id="+AppContext.FSQ_APP_KEY
 		        + "&response_type=code" 
 		        + "&display=touch"
-		        + "&redirect_uri="+MCONSTANTS.FSQ_APP_CALLBACK_OAUTHCALLBACK;
+		        + "&redirect_uri="+AppContext.FSQ_APP_CALLBACK_OAUTHCALLBACK;
 		if(LOGGING.DEBUG)Log.d(TAG, "authRequestRedirect->"+authRequestRedirect);
 		
 		CookieSyncManager.createInstance(this);
@@ -79,20 +82,20 @@ public class AppMainExample extends Activity {
 				
 				String tokenResponse = "";
 				try{
-					webService.setWebServiceUrl(MCONSTANTS.FSQ_APP_OAUTH_BASEURL);
+					webService.setWebServiceUrl(AppContext.FSQ_APP_OAUTH_BASEURL);
 					// Call Foursquare again to get the access token
 					HashMap<String, String> params = new HashMap<String, String>();
-					params.put("client_id", MCONSTANTS.FSQ_APP_KEY);
-					params.put("client_secret", MCONSTANTS.FSQ_APP_SECRET);
+					params.put("client_id", AppContext.FSQ_APP_KEY);
+					params.put("client_secret", AppContext.FSQ_APP_SECRET);
 					params.put("grant_type", "authorization_code");
-					params.put("redirect_uri", MCONSTANTS.FSQ_APP_CALLBACK_OAUTHCALLBACK);
+					params.put("redirect_uri", AppContext.FSQ_APP_CALLBACK_OAUTHCALLBACK);
 					params.put("code", values.getString("code"));
 					if(LOGGING.DEBUG)Log.d(TAG, "params->" + params);
 					
-					tokenResponse = webService.webGet(MCONSTANTS.FSQ_APP_TOKEN_URL, params);
+					tokenResponse = webService.webGet(AppContext.FSQ_APP_TOKEN_URL, params);
 					if(LOGGING.DEBUG)Log.d(TAG, "tokenResponse->" + tokenResponse);
 					
-					broadcastLoginResult(MCONSTANTS.COMMUNITY_FOURSQUARE, tokenResponse);
+					broadcastLoginResult(AppContext.COMMUNITY_FOURSQUARE, tokenResponse);
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 
@@ -116,10 +119,10 @@ public class AppMainExample extends Activity {
     	
     	webService = new WebService();
     	String authRequestRedirect = "https://gowalla.com/api/oauth/new"
-        + "?client_id="+MCONSTANTS.GOWALLA_APP_KEY
+        + "?client_id="+AppContext.GOWALLA_APP_KEY
         + "&scope=read-write"
         + "&display=touch"
-        + "&redirect_uri="+MCONSTANTS.GOWALLA_APP_CALLBACK_OAUTHCALLBACK;
+        + "&redirect_uri="+AppContext.GOWALLA_APP_CALLBACK_OAUTHCALLBACK;
     	
     	CookieSyncManager.createInstance(this);
     	
@@ -137,22 +140,22 @@ public class AppMainExample extends Activity {
                 // call Gowalla again to get Request Token!!!
                 String tokenResponse = "";
 				try{
-					webService.setWebServiceUrl(MCONSTANTS.GOWALLA_APP_OAUTH_BASEURL);
+					webService.setWebServiceUrl(AppContext.GOWALLA_APP_OAUTH_BASEURL);
 					// Call Foursquare again to get the access token
 					Map<String, Object> params = new HashMap<String, Object>();
-					params.put("client_id", MCONSTANTS.GOWALLA_APP_KEY);
-					params.put("client_secret", MCONSTANTS.GOWALLA_APP_SECRET);
+					params.put("client_id", AppContext.GOWALLA_APP_KEY);
+					params.put("client_secret", AppContext.GOWALLA_APP_SECRET);
 					params.put("grant_type", "authorization_code");
-					params.put("redirect_uri", MCONSTANTS.GOWALLA_APP_CALLBACK_OAUTHCALLBACK);
+					params.put("redirect_uri", AppContext.GOWALLA_APP_CALLBACK_OAUTHCALLBACK);
 					params.put("code", values.getString("code"));
 					if(LOGGING.DEBUG)Log.d(TAG, "params->" + params);
 					
-					tokenResponse = webService.webInvokeWithJson(MCONSTANTS.GOWALLA_APP_TOKEN_URL
+					tokenResponse = webService.webInvokeWithJson(AppContext.GOWALLA_APP_TOKEN_URL
 							, webService.getJsonFromParams(params)
 							);
 					if(LOGGING.DEBUG)Log.d(TAG, "tokenResponse->" + tokenResponse);
 					
-					broadcastLoginResult(MCONSTANTS.COMMUNITY_GOWALLA, tokenResponse); 
+					broadcastLoginResult(AppContext.COMMUNITY_GOWALLA, tokenResponse); 
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 					
@@ -179,12 +182,12 @@ public class AppMainExample extends Activity {
 		
     	webService = new WebService();
     	
-    	String authRequestRedirect = MCONSTANTS.FB_APP_OAUTH_BASEURL+MCONSTANTS.FB_APP_OAUTH_URL
-		        + "?client_id="+MCONSTANTS.FB_APP_ID
+    	String authRequestRedirect = AppContext.FB_APP_OAUTH_BASEURL+AppContext.FB_APP_OAUTH_URL
+		        + "?client_id="+AppContext.FB_APP_ID
 		        + "&response_type=token" 
 		        + "&display=touch"
-		        + "&scope=" + TextUtils.join(",", MCONSTANTS.FB_PERMISSIONS)
-		        + "&redirect_uri="+MCONSTANTS.FB_APP_CALLBACK_OAUTHCALLBACK
+		        + "&scope=" + TextUtils.join(",", AppContext.FB_PERMISSIONS)
+		        + "&redirect_uri="+AppContext.FB_APP_CALLBACK_OAUTHCALLBACK
 		        ;
 		if(LOGGING.DEBUG)Log.d(TAG, "authRequestRedirect->"+authRequestRedirect);
 		
@@ -207,7 +210,7 @@ if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user
 					
 					tokenResponse = values.toString();
 					
-					broadcastLoginResult(MCONSTANTS.COMMUNITY_FACEBOOK, tokenResponse);
+					broadcastLoginResult(AppContext.COMMUNITY_FACEBOOK, tokenResponse);
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 
@@ -232,17 +235,17 @@ if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user
 		String intentExtra = "";
 		try {
 			
-			if (MCONSTANTS.COMMUNITY_FOURSQUARE == community) {
-				intentAction = MCONSTANTS.BCAST_USERLOGIN_FSQ;
-				intentExtra = MCONSTANTS.INTENT_EXTRA_USERLOGIN_FSQ;
+			if (AppContext.COMMUNITY_FOURSQUARE == community) {
+				intentAction = AppContext.BCAST_USERLOGIN_FSQ;
+				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_FSQ;
 			}
-			else if (MCONSTANTS.COMMUNITY_GOWALLA == community) {
-				intentAction = MCONSTANTS.BCAST_USERLOGIN_GOWALLA;
-				intentExtra = MCONSTANTS.INTENT_EXTRA_USERLOGIN_GOWALLA;
+			else if (AppContext.COMMUNITY_GOWALLA == community) {
+				intentAction = AppContext.BCAST_USERLOGIN_GOWALLA;
+				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_GOWALLA;
 			}
-			else if (MCONSTANTS.COMMUNITY_FACEBOOK == community) {
-				intentAction = MCONSTANTS.BCAST_USERLOGIN_FACEBOOK;
-				intentExtra = MCONSTANTS.INTENT_EXTRA_USERLOGIN_FACEBOOK;
+			else if (AppContext.COMMUNITY_FACEBOOK == community) {
+				intentAction = AppContext.BCAST_USERLOGIN_FACEBOOK;
+				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_FACEBOOK;
 			}
 			
 			if(LOGGING.DEBUG)Log.d(TAG, "sending Broadcast! " 

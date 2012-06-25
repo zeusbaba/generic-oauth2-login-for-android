@@ -1,20 +1,23 @@
 /***
- * 	Copyright (c) 2011 WareNinja.com
- * 	Author: yg@wareninja.com
- *  http://www.WareNinja.net - https://github.com/wareninja	
- * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
-*/
+	Copyright (c) 2011-2012 WareNinja.com 
+	http://www.WareNinja.com - https://github.com/WareNinja
+	
+	Author: yg@wareninja.com / twitter: @WareNinja
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  not use this file except in compliance with the License. You may obtain
+  a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  >> Summary of the license:
+  	You are allowed to re-use this code as you like, no kittens should be harmed though! 
+ */
+
 
 package com.wareninja.android.opensource.oauth2login.common;
 
@@ -157,7 +160,7 @@ public final class Utils {
         if (method.equals("GET")) {
             url = url + "?" + encodeUrl(params);
         }
-        if (MCONSTANTS.DEBUG)Log.d("Facebook-Util", method + " URL: " + url);
+        if (AppContext.DEBUG)Log.d("Facebook-Util", method + " URL: " + url);
         HttpURLConnection conn = 
             (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestProperty("User-Agent", System.getProperties().
@@ -222,7 +225,7 @@ public final class Utils {
             // Error Stream contains JSON that we can parse to a FB error
             response = read(conn.getErrorStream());
         }
-        if (MCONSTANTS.DEBUG)Log.d("Facebook-Util", method + " response: " + response);
+        if (AppContext.DEBUG)Log.d("Facebook-Util", method + " response: " + response);
         
         return response;
     }
@@ -325,7 +328,7 @@ public final class Utils {
 	public static void go2WareninjaApps(Context context) {
 		
 		Intent intent = new Intent( Intent.ACTION_VIEW, 
-					Uri.parse(MCONSTANTS.WARENINJAAPPS_MARKET_URL));
+					Uri.parse(AppContext.WARENINJAAPPS_MARKET_URL));
 		
 		if ( isIntentAvailable(context, intent) )
 			context.startActivity(intent);
@@ -333,7 +336,7 @@ public final class Utils {
 	public static void go2AppWebsite(Context context) {
 		
 		Intent intent = new Intent( Intent.ACTION_VIEW, 
-				Uri.parse(MCONSTANTS.APPWEBSITE_URL));
+				Uri.parse(AppContext.APPWEBSITE_URL));
 		
 		if ( isIntentAvailable(context, intent) )
 			context.startActivity(intent);

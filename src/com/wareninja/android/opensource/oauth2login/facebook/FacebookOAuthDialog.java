@@ -1,20 +1,23 @@
 /***
- * 	Copyright (c) 2011 WareNinja.com
- * 	Author: yg@wareninja.com
- *  http://www.WareNinja.net - https://github.com/wareninja	
- * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
-*/
+	Copyright (c) 2011-2012 WareNinja.com 
+	http://www.WareNinja.com - https://github.com/WareNinja
+	
+	Author: yg@wareninja.com / twitter: @WareNinja
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  not use this file except in compliance with the License. You may obtain
+  a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  >> Summary of the license:
+  	You are allowed to re-use this code as you like, no kittens should be harmed though! 
+ */
+
 
 package com.wareninja.android.opensource.oauth2login.facebook;
 
@@ -37,7 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.wareninja.android.opensource.oauth2login.R;
-import com.wareninja.android.opensource.oauth2login.common.MCONSTANTS;
+import com.wareninja.android.opensource.oauth2login.common.AppContext;
 import com.wareninja.android.opensource.oauth2login.common.GenericDialogListener;
 import com.wareninja.android.opensource.oauth2login.common.Utils;
 
@@ -46,8 +49,8 @@ public class FacebookOAuthDialog extends Dialog {
 	private static final String TAG = "FacebookOAuthDialog";
 	
 	/* Strings used in the OAuth flow */
-	public static final String SIGNIN_URI = MCONSTANTS.FB_APP_REDIRECT_SIGNIN;
-    public static final String OAUTHCALLBACK_URI = MCONSTANTS.FB_APP_CALLBACK_OAUTHCALLBACK;
+	public static final String SIGNIN_URI = AppContext.FB_APP_REDIRECT_SIGNIN;
+    public static final String OAUTHCALLBACK_URI = AppContext.FB_APP_CALLBACK_OAUTHCALLBACK;
     public static final String CANCEL_URI = "fbconnect://cancel";//NOT used
     //public static final String TOKEN = "access_token";// FIXME: adapt this
     //public static final String EXPIRES = "expires_in";
@@ -139,14 +142,14 @@ public class FacebookOAuthDialog extends Dialog {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            if (MCONSTANTS.DEBUG)Log.d(TAG, "onPageStarted->Webview loading URL: " + url);
+            if (AppContext.DEBUG)Log.d(TAG, "onPageStarted->Webview loading URL: " + url);
             super.onPageStarted(view, url, favicon);
             mSpinner.show();
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
-        	if (MCONSTANTS.DEBUG)Log.d(TAG, "onPageFinished->Webview URL: " + url);
+        	if (AppContext.DEBUG)Log.d(TAG, "onPageFinished->Webview URL: " + url);
         	super.onPageFinished(view, url);
         	
             String title = mWebView.getTitle();

@@ -1,31 +1,35 @@
 /***
- * 	Copyright (c) 2011 WareNinja.com
- * 	Author: yg@wareninja.com
- *  http://www.WareNinja.net - https://github.com/wareninja	
- * 
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
-*/
+	Copyright (c) 2011-2012 WareNinja.com 
+	http://www.WareNinja.com - https://github.com/WareNinja
+	
+	Author: yg@wareninja.com / twitter: @WareNinja
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may
+  not use this file except in compliance with the License. You may obtain
+  a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  >> Summary of the license:
+  	You are allowed to re-use this code as you like, no kittens should be harmed though! 
+ */
+
 
 package com.wareninja.android.opensource.oauth2login.common;
 
 
-public class MCONSTANTS {
+public class AppContext {
 
 	public static final boolean DEBUG = LOGGING.DEBUG;// enable/disable logging
 
 	public static final String WARENINJAAPPS_MARKET_URL = "market://search?q=wareninja";
 	public static final String AMAZON_WARENINJAAPPS_MARKET_URL = 
-		"http://www.amazon.com/s/ref=bl_sr_mobile-apps?_encoding=UTF8&node=2350149011&field-brandtextbin=WareNinja";
+		//"http://www.amazon.com/s/ref=bl_sr_mobile-apps?_encoding=UTF8&node=2350149011&field-brandtextbin=WareNinja";
+			"http://www.amazon.com/gp/mas/dl/android?p=com.wareninja.android.loco&showAll=1";
 	
 	public static final String APPWEBSITE_URL = "http://www.WareNinja.net";
 	
@@ -86,10 +90,11 @@ public class MCONSTANTS {
 	public static final String FSQ_APP_OAUTH_URL = "/oauth2/authenticate";
 	public static final String FSQ_APP_TOKEN_URL = "/oauth2/access_token";
 	
+	// Facebook App Params
 	public static final String FB_APP_ID = "<YOURAPP_atFACEBOOK_APP_ID>";  
 	public static final String[] FB_PERMISSIONS = new String[] {
+		// NOTE: remember to extend these permissions as per your need!!!!
 		"publish_stream", "read_stream"
-		, "offline_access" 
 		}; 
 	public static final String FB_APP_CALLBACK_OAUTHCALLBACK = "fbconnect://success";// YOURAPP_REDIRECT_URI
 	public static final String FB_APP_REDIRECT_SIGNIN = "https://m.facebook.com";

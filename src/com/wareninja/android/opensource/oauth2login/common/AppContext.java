@@ -91,6 +91,7 @@ public class AppContext {
 	public static final String FSQ_APP_TOKEN_URL = "/oauth2/access_token";
 	
 	// Facebook App Params
+	public static final int FACEBOOK_SSO_ACTIVITY_CODE = 8844;
 	public static final String FB_APP_ID = "<YOURAPP_atFACEBOOK_APP_ID>";  
 	public static final String[] FB_PERMISSIONS = new String[] {
 		// NOTE: remember to extend these permissions as per your need!!!!

@@ -18,3 +18,7 @@ target
 .settings
 .springBeans
 
+
+gen/com/wareninja/android/opensource/oauth2login/R.java
+
+project.properties

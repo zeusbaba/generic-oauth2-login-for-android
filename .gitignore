@@ -26,5 +26,7 @@ project.properties
 bin/AndroidManifest.xml
 
 bin/jarlist.cache
+bin/
 
 gen/com/wareninja/android/opensource/oauth2login/BuildConfig.java
+gen/

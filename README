@@ -1,8 +1,11 @@
 OAuth2 login implementation for Facebook, Foursquare, Gowalla
-includes example code and generic OAuth dialog
+includes example code and generic OAuth dialog.
+As an extra; Facebook SSO integration for seamless login!
+
 You can use this code as you wish!
 Grab and re-use the code, or include as library, etc etc
 
 Enjoy!
-www.WareNinja.net
+www.WareNinja.com
+beta.loco8.net
 

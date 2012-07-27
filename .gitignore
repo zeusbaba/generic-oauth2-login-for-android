@@ -22,3 +22,9 @@ target
 gen/com/wareninja/android/opensource/oauth2login/R.java
 
 project.properties
+
+bin/AndroidManifest.xml
+
+bin/jarlist.cache
+
+gen/com/wareninja/android/opensource/oauth2login/BuildConfig.java

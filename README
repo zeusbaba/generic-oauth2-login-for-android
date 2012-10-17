@@ -1,4 +1,4 @@
-OAuth2 login implementation for Facebook, Foursquare, Gowalla
+OAuth2 login implementation for Facebook, Foursquare, Gowalla, Twilio
 includes example code and generic OAuth dialog.
 As an extra; Facebook SSO integration for seamless login!
 

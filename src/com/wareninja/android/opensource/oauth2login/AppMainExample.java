@@ -32,6 +32,7 @@ import com.wareninja.android.opensource.oauth2login.common.WebService;
 import com.wareninja.android.opensource.oauth2login.facebook.FacebookOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.foursquare.FsqOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.gowalla.GowallaOAuthDialog;
+import com.wareninja.android.opensource.twilio_connect.TwilioAuthDialog;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -105,7 +106,7 @@ public class AppMainExample extends Activity {
 					tokenResponse = webService.webGet(AppContext.FSQ_APP_TOKEN_URL, params);
 					if(LOGGING.DEBUG)Log.d(TAG, "tokenResponse->" + tokenResponse);
 					
-					broadcastLoginResult(AppContext.COMMUNITY_FOURSQUARE, tokenResponse);
+					broadcastLoginResult(AppContext.COMMUNITY.FOURSQUARE, tokenResponse);
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 
@@ -165,7 +166,7 @@ public class AppMainExample extends Activity {
 							);
 					if(LOGGING.DEBUG)Log.d(TAG, "tokenResponse->" + tokenResponse);
 					
-					broadcastLoginResult(AppContext.COMMUNITY_GOWALLA, tokenResponse); 
+					broadcastLoginResult(AppContext.COMMUNITY.GOWALLA, tokenResponse); 
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 					
@@ -185,6 +186,56 @@ public class AppMainExample extends Activity {
     	
     }
 
+    public void onClick_twilioConnect(View v) {
+		//NotifierHelper.displayToast(mContext, "onClick_twilioConnect", NotifierHelper.SHORT_TOAST);
+		
+		// https://www.twilio.com/docs/connect
+		
+    	webService = new WebService();
+    	
+    	String authRequestRedirect = AppContext.TWILIO_APP_OAUTH_BASEURL
+				+AppContext.TWILIO_APP_ID
+				+ "/signin";// begin with signin page first
+		if(LOGGING.DEBUG)Log.d(TAG, "authRequestRedirect->"+authRequestRedirect);
+		
+		CookieSyncManager.createInstance(this);
+		new TwilioAuthDialog(mContext, authRequestRedirect
+				, new GenericDialogListener() {
+			public void onComplete(Bundle values) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onComplete->"+values);
+// http://www.example.com/twilio/authorize?AccountSid=AC12345
+//   Your Connect App's Authorize URL       Customer's SID
+/*
+if user ALLOWs your app -> Bundle[{AccountSid=<user_AccountSid>}]
+if user doesNOT ALLOW -> Bundle[{error=blablabla}]
+*/
+				// ensure any cookies set by the dialog are saved
+                CookieSyncManager.getInstance().sync();
+				
+				String tokenResponse = "";
+				try{
+					
+					tokenResponse = values.toString();
+					
+					broadcastLoginResult(AppContext.COMMUNITY.TWILIO, tokenResponse);
+					//JSONObject tokenJson = new JSONObject(tokenResponse);
+					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
+
+				}
+				catch (Exception ex1){
+					Log.w(TAG, ex1.toString());
+					tokenResponse = null;
+				}
+		    }
+			public void onError(String e) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onError->"+e);
+		    }
+			public void onCancel() {
+				if(LOGGING.DEBUG)Log.d(TAG, "onCancel()");
+		    }
+		}).show();
+	}
+    
 	public void onClick_facebookLogin(View v) {
 		//NotifierHelper.displayToast(mContext, "TODO: onClick_facebookLogin", NotifierHelper.SHORT_TOAST);
 		
@@ -220,7 +271,7 @@ if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user
 					
 					tokenResponse = values.toString();
 					
-					broadcastLoginResult(AppContext.COMMUNITY_FACEBOOK, tokenResponse);
+					broadcastLoginResult(AppContext.COMMUNITY.FACEBOOK, tokenResponse);
 					//JSONObject tokenJson = new JSONObject(tokenResponse);
 					//if(LOGGING.DEBUG)Log.d(TAG, "tokenJson->" + tokenJson);
 
@@ -246,23 +297,27 @@ if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user
 	}
 	
 	
-	private void broadcastLoginResult(int community, String payload) {
+	private void broadcastLoginResult(AppContext.COMMUNITY community, String payload) {
 		
 		String intentAction = "";
 		String intentExtra = "";
 		try {
 			
-			if (AppContext.COMMUNITY_FOURSQUARE == community) {
+			if (AppContext.COMMUNITY.FOURSQUARE == community) {
 				intentAction = AppContext.BCAST_USERLOGIN_FSQ;
 				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_FSQ;
 			}
-			else if (AppContext.COMMUNITY_GOWALLA == community) {
+			else if (AppContext.COMMUNITY.GOWALLA == community) {
 				intentAction = AppContext.BCAST_USERLOGIN_GOWALLA;
 				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_GOWALLA;
 			}
-			else if (AppContext.COMMUNITY_FACEBOOK == community) {
+			else if (AppContext.COMMUNITY.FACEBOOK == community) {
 				intentAction = AppContext.BCAST_USERLOGIN_FACEBOOK;
 				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_FACEBOOK;
+			}
+			else if (AppContext.COMMUNITY.TWILIO == community) {
+				intentAction = AppContext.BCAST_USERLOGIN_TWILIO;
+				intentExtra = AppContext.INTENT_EXTRA_USERLOGIN_TWILIO;
 			}
 			
 			if(LOGGING.DEBUG)Log.d(TAG, "sending Broadcast! " 
@@ -509,7 +564,8 @@ if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user
 					
 					tokenResponse = respValues.toString();
 					
-					broadcastLoginResult(AppContext.COMMUNITY_FACEBOOK, tokenResponse);
+					//broadcastLoginResult(AppContext.COMMUNITY_FACEBOOK, tokenResponse);
+					broadcastLoginResult(AppContext.COMMUNITY.FACEBOOK, tokenResponse);
 
 				}
 				catch (Exception ex1){

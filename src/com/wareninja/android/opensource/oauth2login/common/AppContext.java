@@ -28,20 +28,12 @@ public class AppContext {
 
 	public static final String WARENINJAAPPS_MARKET_URL = "market://search?q=wareninja";
 	public static final String AMAZON_WARENINJAAPPS_MARKET_URL = 
-		//"http://www.amazon.com/s/ref=bl_sr_mobile-apps?_encoding=UTF8&node=2350149011&field-brandtextbin=WareNinja";
 			"http://www.amazon.com/gp/mas/dl/android?p=com.wareninja.android.loco&showAll=1";
 	
 	public static final String APPWEBSITE_URL = "http://www.WareNinja.net";
 	
 	public static final String GRAPH_BASE_URL = "http://graph.facebook.com/";
 	public static final String GRAPH_BASE_URL_SSL = "https://graph.facebook.com/";
-	
-	public static final int ACTIONID_LOGIN_FACEBOOK = 0;
-	public static final String ACTIONNAME_LOGIN_FACEBOOK = "LOGIN_FACEBOOK";
-	public static final int ACTIONID_LOGIN_GOWALLA = 1;
-	public static final String ACTIONNAME_LOGIN_GOWALLA = "LOGIN_GOWALLA";
-	public static final int ACTIONID_LOGIN_FOURSQUARE = 2;
-	public static final String ACTIONNAME_LOGIN_FOURSQUARE = "LOGIN_FOURSQUARE";
 	
 	// REGISTER to these bcast identifiers and you will get login response together with its payload as json (INTENT_EXTRA_...)!!!
 	public static final String INTENT_EXTRA_USERLOGIN_FSQ = "USERLOGIN_FSQ";
@@ -50,6 +42,8 @@ public class AppContext {
     public static final String BCAST_USERLOGIN_FACEBOOK = "com.wareninja.android.opensource.oauth2login.BCAST_USERLOGIN_FACEBOOK";
     public static final String INTENT_EXTRA_USERLOGIN_GOWALLA = "USERLOGIN_GOWALLA";
     public static final String BCAST_USERLOGIN_GOWALLA = "com.wareninja.android.opensource.oauth2login.BCAST_USERLOGIN_GOWALLA";
+    public static final String INTENT_EXTRA_USERLOGIN_TWILIO = "USERLOGIN_TWILIO";
+    public static final String BCAST_USERLOGIN_TWILIO = "com.wareninja.android.opensource.oauth2login.BCAST_USERLOGIN_TWILIO";
     
     public static final String INTENT_EXTRA_USERLOGOUT_FSQ = "USERLOGOUT_FSQ";
     public static final String BCAST_USERLOGOUT_FSQ = "com.wareninja.android.opensource.oauth2login.BCAST_USERLOGOUT_FSQ";
@@ -58,22 +52,12 @@ public class AppContext {
     public static final String INTENT_EXTRA_USERLOGOUT_GOWALLA = "USERLOGOUT_GOWALLA";
     public static final String BCAST_USERLOGOUT_GOWALLA = "com.wareninja.android.opensource.oauth2login.BCAST_USERLOGOUT_GOWALLA";
 	
-	// --- DIALOG CONSTANTS ---
-	// PDIALOG -> ProgressDialog
-	public static final int LOGIN_PDIALOG_FACEBOOK = 100;
-	public static final int LOGIN_PDIALOG_FSQ = 101;
-	public static final int LOGIN_PDIALOG_GOWALLA = 102;
-	public static final int LOGOUT_PDIALOG_FACEBOOK = 200;
-	public static final int LOGOUT_PDIALOG_FSQ = 201;
-	public static final int LOGOUT_PDIALOG_GOWALLA = 202;
-	
-	
 	//public static final String APP_CACHEDIR = ".WareNinja_OpenSource_appCache";
 	
 	// -->> REPLACE THESE VALUES WITH YOUR OWN APP!!!! <<--
 	// NOTE: below values are using Test App for WareNinja.net ONLY!
 	
-	// Gowalla App params
+	// Gowalla App params - NOTE: GOWALLA is DEAD! 
 	public static final String GOWALLA_APP_KEY = "<YOURAPP_atGOWALLA_API_KEY>";  
 	public static final String GOWALLA_APP_SECRET = "<YOURAPP_atGOWALLA_API_SECRET>";
 	public static final String GOWALLA_APP_CALLBACK_OAUTHCALLBACK = "http://WareNinja_OpenSource";// YOURAPP_REDIRECT_URI
@@ -102,17 +86,22 @@ public class AppContext {
 	public static final String FB_APP_OAUTH_BASEURL = "https://m.facebook.com";
 	public static final String FB_APP_OAUTH_URL = "/dialog/oauth/";
 	
+	
+	// -> Twilio Connect params
+	public static final String TWILIO_APP_ID = "<YOURAPP_atTWILIO_APP_SID>";// Connect App SID
+	public static final String TWILIO_APP_CALLBACK_OAUTHCALLBACK = "http://WareNinja_OpenSource";// YOURAPP_REDIRECT_URI
+	public static final String TWILIO_APP_REDIRECT_SIGNIN = "https://www.twilio.com/authorize/";
+	public static final String TWILIO_APP_OAUTH_BASEURL = "https://www.twilio.com/authorize/";
+		
+	
 	public static final String FACEBOOK_USER_ME = "_FACEBOOK_USER_ME";
 	public static final String FOURSQUARE_USER_ME = "_FOURSQUARE_USER_ME";
 	public static final String GOWALLA_USER_ME = "_GOWALLA_USER_ME";
-	
-	public static final String[] COMMUNITY = {
-        "FOURSQUARE", "FACEBOOK", "GOWALLA"
-        };
-	public static final int COMMUNITY_FOURSQUARE = 0;
-	public static final int COMMUNITY_FACEBOOK = 1;
-	public static final int COMMUNITY_GOWALLA = 2;
+	public static final String TWILIO_USER_ME = "_TWILIO_USER_ME";
 
-	
+	public enum COMMUNITY {
+		FACEBOOK, FOURSQUARE, GOWALLA
+		, TWILIO
+	}
 
 }

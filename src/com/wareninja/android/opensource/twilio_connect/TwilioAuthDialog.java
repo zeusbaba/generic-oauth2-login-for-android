@@ -53,7 +53,7 @@ public class TwilioAuthDialog extends Dialog {
 	//public static final String SIGNIN_URI = AppContext.TWILIO_APP_REDIRECT_SIGNIN;
     public static final String OAUTHCALLBACK_URI = AppContext.TWILIO_APP_CALLBACK_OAUTHCALLBACK;
     public static final String CANCEL_URI = "twilioconnect://cancel";//NOT used
-	
+	 
     static final int BG_COLOR = Color.LTGRAY;//0xFF6D84B4;
     static final float[] DIMENSIONS_LANDSCAPE = {460, 260};
     static final float[] DIMENSIONS_PORTRAIT = {280, 420};

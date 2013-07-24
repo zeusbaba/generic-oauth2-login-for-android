@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.wareninja.android.opensource.oauth2login"
-      android:versionCode="1"
-      android:versionName="1.0.1_30mar11"
+      android:versionCode="2"
+      android:versionName="1.0.2_24jul13"
       >
       
     <uses-sdk android:minSdkVersion="4" />

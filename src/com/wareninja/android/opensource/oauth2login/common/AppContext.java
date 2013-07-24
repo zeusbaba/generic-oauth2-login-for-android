@@ -86,6 +86,22 @@ public class AppContext {
 	public static final String FB_APP_OAUTH_BASEURL = "https://m.facebook.com";
 	public static final String FB_APP_OAUTH_URL = "/dialog/oauth/";
 	
+	// Instagram App Params
+	public static final String INSTAGRAM_APP_ID = "<YOURAPP_atINSTAGRAM_CLIENT_ID>";  
+	public static final String[] INSTAGRAM_PERMISSIONS = new String[] {
+	/* see: http://instagram.com/developer/authentication/#scope
+	 * basic - to read any and all data related to a user (e.g. following/followed-by lists, photos, etc.) (granted by default)
+	 * comments - to create or delete comments on a userÕs behalf
+	 * relationships - to follow and unfollow users on a userÕs behalf
+	 * likes - to like and unlike items on a userÕs behalf
+	 */
+		// NOTE: remember to extend these permissions as per your need!!!!  
+		"likes", "comments"
+		}; 
+	public static final String INSTAGRAM_APP_CALLBACK_OAUTHCALLBACK = "http://WareNinja_OpenSource";// YOURAPP_REDIRECT_URI; must be as defined in INSTAGRAM_APP definition!
+	public static final String INSTAGRAM_APP_OAUTH_BASEURL = "https://instagram.com";
+	public static final String INSTAGRAM_APP_OAUTH_URL = "/oauth/authorize/";
+	
 	
 	// -> Twilio Connect params
 	public static final String TWILIO_APP_ID = "<YOURAPP_atTWILIO_APP_SID>";// Connect App SID
@@ -102,6 +118,7 @@ public class AppContext {
 	public enum COMMUNITY {
 		FACEBOOK, FOURSQUARE, GOWALLA
 		, TWILIO
+		, INSTAGRAM
 	}
 
 }

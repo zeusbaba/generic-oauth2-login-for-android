@@ -32,6 +32,7 @@ import com.wareninja.android.opensource.oauth2login.common.WebService;
 import com.wareninja.android.opensource.oauth2login.facebook.FacebookOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.foursquare.FsqOAuthDialog;
 import com.wareninja.android.opensource.oauth2login.gowalla.GowallaOAuthDialog;
+import com.wareninja.android.opensource.oauth2login.instagram.InstagramOAuthDialog;
 import com.wareninja.android.opensource.twilio_connect.TwilioAuthDialog;
 
 import android.app.Activity;
@@ -235,6 +236,59 @@ if user doesNOT ALLOW -> Bundle[{error=blablabla}]
 		    }
 		}).show();
 	}
+    
+    
+    public void onClick_instagramLogin(View v) {
+		//NotifierHelper.displayToast(mContext, "TODO: onClick_instagramLogin", NotifierHelper.SHORT_TOAST);
+		// http://instagram.com/developer/authentication/#
+		
+    	webService = new WebService();
+    	
+    	String authRequestRedirect = AppContext.INSTAGRAM_APP_OAUTH_BASEURL+AppContext.INSTAGRAM_APP_OAUTH_URL
+		        + "?client_id="+AppContext.INSTAGRAM_APP_ID
+		        + "&response_type=token" 
+		        + "&display=touch"
+		        + "&scope=" + TextUtils.join("+", AppContext.INSTAGRAM_PERMISSIONS)
+		        + "&redirect_uri="+AppContext.INSTAGRAM_APP_CALLBACK_OAUTHCALLBACK
+		        ;
+		if(LOGGING.DEBUG)Log.d(TAG, "authRequestRedirect->"+authRequestRedirect);
+		
+		CookieSyncManager.createInstance(this);
+		new InstagramOAuthDialog(mContext, authRequestRedirect
+				, new GenericDialogListener() {
+			public void onComplete(Bundle values) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onComplete->"+values);
+				// http://your-redirect-uri#access_token=....
+				// onComplete->Bundle[{access_token=<ACCESS_TOKEN>}]
+/*
+if user ALLOWs your app -> Bundle[{access_token=<ACCESS_TOKEN>}]
+if user doesNOT ALLOW -> Bundle[{error=access_denied, error_description=The+user+denied+your+request}]
+ */
+				// ensure any cookies set by the dialog are saved
+                CookieSyncManager.getInstance().sync();
+				
+				String tokenResponse = "";
+				try{
+					
+					tokenResponse = values.toString();
+					
+					broadcastLoginResult(AppContext.COMMUNITY.INSTAGRAM, tokenResponse);
+
+				}
+				catch (Exception ex1){
+					Log.w(TAG, ex1.toString());
+					tokenResponse = null;
+				}
+		    }
+			public void onError(String e) {
+				if(LOGGING.DEBUG)Log.d(TAG, "onError->"+e);
+		    }
+			public void onCancel() {
+				if(LOGGING.DEBUG)Log.d(TAG, "onCancel()");
+		    }
+		}).show();
+	}
+    
     
 	public void onClick_facebookLogin(View v) {
 		//NotifierHelper.displayToast(mContext, "TODO: onClick_facebookLogin", NotifierHelper.SHORT_TOAST);

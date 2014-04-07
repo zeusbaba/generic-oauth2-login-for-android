@@ -1,12 +1,11 @@
-OAuth2 login implementation for Facebook, Foursquare, Instagram, Gowalla, Twilio
-includes example code and generic OAuth dialog.
+OAuth2 login implementation for Facebook, Foursquare, Instagram, Gowalla, Twilio.    
+includes example code, and generic OAuth dialog.
 As an extra; Facebook SSO integration for seamless login!
 
-You can use this code as you wish!
-Grab and re-use the code, or include as library, etc etc
+Re-use the code, or just include as Android library, etc etc
 
 Enjoy!
 www.WareNinja.com    
-http://beta.loco8.net    
+http://loco8.com    
 
 
